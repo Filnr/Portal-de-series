@@ -1,0 +1,29 @@
+{
+    "Logo" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReu3QWl8VfSBezzlwgyICZE3N3aqDoelhy0A&s",
+    "Autor": [
+        {
+            "Nome": "Filipe Nery Rabelo",
+            "Curso": "Ciência da Computação",
+            "Sobre": "Sou um calouro da PUC Minas, atualmente cursando Ciência da Computação, Estudo sobre a linguagem C e criação de paginas web.",
+            "Redes_Sociais": [
+                {
+                    "Nome": "Instagram",
+                    "Img": "https://cdn-icons-png.flaticon.com/512/174/174855.png",
+                    "Link": "https://www.instagram.com/filipenery1/"
+                },
+                {
+                    "Nome": "Linkedin",
+                    "Img": "https://image.flaticon.com/icons/png/512/174/174857.png",
+                    "Link": "https://www.linkedin.com/in/filipe-nery-rabelo-7b1b3b1b4/"
+                },
+                {
+                    "Nome": "Github",
+                    "Img": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+                    "Link": "https://github.com/Filnr"
+                }
+            ],
+            "Turma": "Manhã",
+            "Img": "https://drive.google.com/uc?export=view&id=1tSr91vEpPMS3Xho3DsLrVNd9BchqMSXH"
+        }
+    ]
+}
