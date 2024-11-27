@@ -6,12 +6,12 @@ header {
 }
 
 
-.logo {
+#logo {
     max-width: 150px;
 }
 
 
-.logo a {
+#logo a {
     text-decoration: none;
 }
 
@@ -22,7 +22,7 @@ main .titulo {
     border-bottom: solid 2px rgb(44, 44, 44);
 }
 
-#perfil {
+#imagemAutor {
     width: 150px;
     height: 150px;
     border-radius: 10%;

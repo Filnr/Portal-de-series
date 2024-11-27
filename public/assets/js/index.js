@@ -36,7 +36,6 @@ document.addEventListener('DOMContentLoaded', function(){
             const cursoAutor = document.getElementById('cursoAutor');
             const sobreAutor = document.getElementById('sobreAutor');
             const imagemAutor = document.getElementById('imagemAutor');
-            
             if (nomeAutor) nomeAutor.textContent = autor.Nome;
             if (cursoAutor) cursoAutor.textContent = autor.Curso;
             if (sobreAutor) sobreAutor.textContent = autor.Sobre;

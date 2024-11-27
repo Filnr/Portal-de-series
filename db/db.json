@@ -1,5 +1,5 @@
 {
-    "Logo" : "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcReu3QWl8VfSBezzlwgyICZE3N3aqDoelhy0A&s",
+    "Logo" : "https://github.com/Filnr/Portal-de-series/blob/Filnr-patch-1/logo.png?raw=true",
     "Autor": [
         {
             "Nome": "Filipe Nery Rabelo",
@@ -13,7 +13,7 @@
                 },
                 {
                     "Nome": "Linkedin",
-                    "Img": "https://image.flaticon.com/icons/png/512/174/174857.png",
+                    "Img": "https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png",
                     "Link": "https://www.linkedin.com/in/filipe-nery-rabelo-7b1b3b1b4/"
                 },
                 {
@@ -23,7 +23,7 @@
                 }
             ],
             "Turma": "Manhã",
-            "Img": "https://drive.google.com/uc?export=view&id=1tSr91vEpPMS3Xho3DsLrVNd9BchqMSXH"
+            "Img": "https://avatars.githubusercontent.com/u/140031580?v=4"
         }
     ]
 }
