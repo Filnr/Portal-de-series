@@ -1,20 +1,26 @@
 const url = 'http://localhost:3000/'
+const urlAPI = 'https://api.themoviedb.org/3/tv/top_rated?language=pt-BR&page=1';
+const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZmIyZTU3ZGFkMTY1N2U3ZDQ3Yzg4M2YyZTVjMTdiYiIsIm5iZiI6MTczMjc0NTMwNC43NjA2ODM1LCJzdWIiOiI2NzI2NzFjNmFmZjdlMDFjNjE4NWNiNjgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.w1PDox2cb4RGcML-PGDKl5aVWnT4ZY1Z4QGeGUORPHQ'
+    }
+};
 
-document.addEventListener('DOMContentLoaded', function(){
+document.addEventListener('DOMContentLoaded', function () {
     // Fetch Logo 
     const urlLogo = url + 'Logo';
     fetch('/Logo')
         .then(response => {
-            if(!response.ok){
+            if (!response.ok) {
                 throw new Error('Erro ao executar requisição: ' + response.status);
             }
             return response.text() // Mudança aqui: use text() em vez de json()
         })
         .then(data => {
-            console.log(data);
             let logo = document.getElementById('logo');
             logo.src = data;
-            console.log(logo.src);
         })
         .catch(error => {
             console.error('Erro no fetch do Logo:', error);
@@ -23,14 +29,14 @@ document.addEventListener('DOMContentLoaded', function(){
     const urlAutor = url + 'Autor';
     fetch(urlAutor)
         .then(res => {
-            if(!res.ok){
+            if (!res.ok) {
                 throw new Error('Erro ao executar requisição: ' + res.status);
             }
             return res.json()
         })
         .then(data => {
             const autor = data[0];
-            
+
             // Verificação de existência dos elementos
             const nomeAutor = document.getElementById('nomeAutor');
             const cursoAutor = document.getElementById('cursoAutor');
@@ -48,11 +54,11 @@ document.addEventListener('DOMContentLoaded', function(){
                     const link = document.createElement('a');
                     link.href = rede.Link;
                     link.target = '_blank';
-                    
+
                     const img = document.createElement('img');
                     img.src = rede.Img;
                     img.alt = rede.Nome;
-                    
+
                     link.appendChild(img);
                     redesSociais.appendChild(link);
                 });
@@ -61,4 +67,67 @@ document.addEventListener('DOMContentLoaded', function(){
         .catch(error => {
             console.error('Erro no fetch do Autor:', error);
         });
+    //Series Populares
+    //Series Populares
+fetch(urlAPI, options)
+.then(response => {
+    if (!response.ok) {
+        throw new Error('Erro ao executar requisição: ' + response.status);
+    }
+    return response.json();
+})
+.then(populares => {
+    console.log(populares);
+    const series = populares.results;
+    const carousel = document.getElementById('carouselSeries');
+    const carouselIndicators = document.getElementById('carouselIndicators');
+
+    // Clear any existing indicators (if any)
+    carouselIndicators.innerHTML = '';
+    carousel.innerHTML = '';
+
+    // Generate carousel indicators and items dynamically
+    series.forEach((serie, index) => {
+        // Create Indicator
+        const indicator = document.createElement('button');
+        indicator.type = 'button';
+        indicator.setAttribute('data-bs-target', '#carouselExampleCaptions');
+        indicator.setAttribute('data-bs-slide-to', index);
+        indicator.setAttribute('aria-label', `Slide ${index + 1}`);
+        
+        // Add active class to first indicator
+        if (index === 0) {
+            indicator.classList.add('active');
+            indicator.setAttribute('aria-current', 'true');
+        }
+        
+        carouselIndicators.appendChild(indicator);
+
+        // Create Carousel Item
+        const carouselItem = document.createElement('div');
+        carouselItem.classList.add('carousel-item');
+        
+        // Add active class to first item
+        if (index === 0) {
+            carouselItem.classList.add('active');
+        }
+
+        carouselItem.innerHTML = `
+            <a href="serie.html#${serie.id}">
+                <img class="d-block w-100" 
+                     src="https://image.tmdb.org/t/p/original${serie.backdrop_path}" 
+                     alt="${serie.name}">
+            </a>
+            <div class="carousel-caption d-none d-md-block">
+                <h5>${serie.name}</h5>
+            </div>
+        `;
+
+        carousel.appendChild(carouselItem);
+    });
+})
+.catch(error => {
+    console.error('Erro ao buscar séries populares:', error);
+});
+        
 });
