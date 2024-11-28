@@ -1,3 +1,4 @@
+import { token } from './token.js';
 const url = 'http://localhost:3000/';
 let hashValue = window.location.hash; // Exemplo: "#1396"
 let id = hashValue.substring(1);
@@ -6,7 +7,7 @@ const options = {
   method: 'GET',
   headers: {
     accept: 'application/json',
-    Authorization: 'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI5ZmIyZTU3ZGFkMTY1N2U3ZDQ3Yzg4M2YyZTVjMTdiYiIsIm5iZiI6MTczMjc0NTMwNC43NjA2ODM1LCJzdWIiOiI2NzI2NzFjNmFmZjdlMDFjNjE4NWNiNjgiLCJzY29wZXMiOlsiYXBpX3JlYWQiXSwidmVyc2lvbiI6MX0.w1PDox2cb4RGcML-PGDKl5aVWnT4ZY1Z4QGeGUORPHQ'
+    Authorization: `Bearer ${token}`
   }
 };
 document.addEventListener('DOMContentLoaded', function () {
