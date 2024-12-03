@@ -1,6 +1,6 @@
 {
     "Logo" : "https://github.com/Filnr/Portal-de-series/blob/Filnr-patch-1/logo.png?raw=true",
-    "Autor": [
+    "Autor":
         {
             "Nome": "Filipe Nery Rabelo",
             "Curso": "Ciência da Computação",
@@ -24,6 +24,11 @@
             ],
             "Turma": "Manhã",
             "Img": "https://avatars.githubusercontent.com/u/140031580?v=4"
+        },
+    "Favoritos" : [
+        {
+            "id" : 1396,
+            "Nome" : "Breaking Bad: A Química do Mal"
         }
     ]
 }

@@ -1,11 +1,11 @@
-import { token } from './token.js';
+import { TOKEN } from './envs.js';
 const url = 'http://localhost:3000/'
 const urlAPI = 'https://api.themoviedb.org/3/tv/top_rated?language=pt-BR&page=1';
 const options = {
     method: 'GET',
     headers: {
         accept: 'application/json',
-        Authorization: `Bearer ${token}`
+        Authorization: `Bearer ${TOKEN}`
     }
 };
 
