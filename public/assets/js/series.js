@@ -23,7 +23,6 @@ const detalhes = {
 };
 
 document.addEventListener('DOMContentLoaded', function () {
-    const urlLogo = url + 'Logo';
     fetch('/Logo')
         .then(response => {
             if (!response.ok) {
@@ -42,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
     fetch(urlSerie, options)
         .then(res => res.json())
         .then(serie => {
-            console.log(serie);
             //Visão Geral
             const titulo = document.getElementById('titulo');
             const imagem = document.getElementById('imagem');
@@ -64,17 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
             if (temporadas) {
                 serie.seasons.forEach(temporada => {
                     const div = document.createElement('div');
-                    div.className = 'row p-4 bg-light rounded shadow-sm mb-4';
+                    div.className = 'row p-1';
                     div.innerHTML = `
+                        <div class="row p-4 bg-light rounded shadow-sm mb-4">
                         <div class="col-md-3">
                             <img src="https://image.tmdb.org/t/p/w500/${temporada.poster_path}" alt="${temporada.name}">
                         </div>
-                            <div class="col-md-9">
-                                <h5 class="card-title">${temporada.name}</h5>
-                                <p class="card-text">${temporada.overview}</p>
-                                <p class="card-text">Episódios: ${temporada.episode_count}</p>
-                            </div>
-                        </div>`;
+                        <div class="col-md-9">
+                            <h5 class="card-title">${temporada.name}</h5>
+                             <p class="card-text">${temporada.overview}</p>
+                            <p class="card-text">Episódios: ${temporada.episode_count}</p>
+                        </div>
+                    </div>`;
                     temporadas.appendChild(div);
                 }
 
@@ -93,7 +92,6 @@ document.addEventListener('DOMContentLoaded', function () {
             return res.json();
         })
         .then(elenco => {
-            console.log(elenco);
             const elencoDiv = document.getElementById('elenco');
             if (elencoDiv) {
                 elenco.cast.forEach(pessoa => {
@@ -113,4 +111,29 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
         })
+        .catch(err => console.error(err));
+    
+    //Add favoritos
+    document.getElementById('favoritos').addEventListener('click', function () {
+    fetch('/Favoritos', {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ id: id })
+    })
+    .then(response => {
+        if (!response.ok) {
+        throw new Error('Erro ao adicionar aos favoritos: ' + response.status);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Adicionado aos favoritos:', data);
+    })
+    .catch(error => {
+        console.error('Erro no fetch dos Favoritos:', error);
+    });
+    });
+
 });

@@ -1,34 +1,39 @@
 {
-    "Logo" : "https://github.com/Filnr/Portal-de-series/blob/Filnr-patch-1/logo.png?raw=true",
-    "Autor":
-        {
-            "Nome": "Filipe Nery Rabelo",
-            "Curso": "Ciência da Computação",
-            "Sobre": "Sou um calouro da PUC Minas, atualmente cursando Ciência da Computação, Estudo sobre a linguagem C e criação de paginas web.",
-            "Redes_Sociais": [
-                {
-                    "Nome": "Instagram",
-                    "Img": "https://cdn-icons-png.flaticon.com/512/174/174855.png",
-                    "Link": "https://www.instagram.com/filipenery1/"
-                },
-                {
-                    "Nome": "Linkedin",
-                    "Img": "https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png",
-                    "Link": "https://www.linkedin.com/in/filipe-nery-rabelo-7b1b3b1b4/"
-                },
-                {
-                    "Nome": "Github",
-                    "Img": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
-                    "Link": "https://github.com/Filnr"
-                }
-            ],
-            "Turma": "Manhã",
-            "Img": "https://avatars.githubusercontent.com/u/140031580?v=4"
-        },
-    "Favoritos" : [
-        {
-            "id" : 1396,
-            "Nome" : "Breaking Bad: A Química do Mal"
-        }
-    ]
+  "Logo": "https://github.com/Filnr/Portal-de-series/blob/Filnr-patch-1/logo.png?raw=true",
+  "Autor": {
+    "Nome": "Filipe Nery Rabelo",
+    "Curso": "Ciência da Computação",
+    "Sobre": "Sou um calouro da PUC Minas, atualmente cursando Ciência da Computação, Estudo sobre a linguagem C e criação de paginas web.",
+    "Redes_Sociais": [
+      {
+        "Nome": "Instagram",
+        "Img": "https://cdn-icons-png.flaticon.com/512/174/174855.png",
+        "Link": "https://www.instagram.com/filipenery1/"
+      },
+      {
+        "Nome": "Linkedin",
+        "Img": "https://cdn1.iconfinder.com/data/icons/logotypes/32/circle-linkedin-512.png",
+        "Link": "https://www.linkedin.com/in/filipe-nery-rabelo-7b1b3b1b4/"
+      },
+      {
+        "Nome": "Github",
+        "Img": "https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png",
+        "Link": "https://github.com/Filnr"
+      }
+    ],
+    "Turma": "Manhã",
+    "Img": "https://avatars.githubusercontent.com/u/140031580?v=4"
+  },
+  "Favoritos": [
+    {
+      "id": "1396",
+      "Nome": "Breaking Bad: A Química do Mal"
+    },
+    {
+      "id": "1396"
+    },
+    {
+      "id": "94954"
+    }
+  ]
 }

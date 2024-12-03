@@ -28,7 +28,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     // Fetch Autor
     const urlAutor = url + 'Autor';
-    fetch(urlAutor)
+    fetch('/Autor')
         .then(res => {
             if (!res.ok) {
                 throw new Error('Erro ao executar requisição: ' + res.status);
@@ -36,7 +36,7 @@ document.addEventListener('DOMContentLoaded', function () {
             return res.json()
         })
         .then(data => {
-            const autor = data[0];
+            const autor = data;
 
             // Verificação de existência dos elementos
             const nomeAutor = document.getElementById('nomeAutor');
@@ -70,50 +70,49 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     //Series Populares
     //Series Populares
-fetch(urlAPI, options)
-.then(response => {
-    if (!response.ok) {
-        throw new Error('Erro ao executar requisição: ' + response.status);
-    }
-    return response.json();
-})
-.then(populares => {
-    console.log(populares);
-    const series = populares.results;
-    const carousel = document.getElementById('carouselSeries');
-    const carouselIndicators = document.getElementById('carouselIndicators');
+    fetch(urlAPI, options)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Erro ao executar requisição: ' + response.status);
+            }
+            return response.json();
+        })
+        .then(populares => {
+            const series = populares.results;
+            const carousel = document.getElementById('carouselSeries');
+            const carouselIndicators = document.getElementById('carouselIndicators');
 
-    // Clear any existing indicators (if any)
-    carouselIndicators.innerHTML = '';
-    carousel.innerHTML = '';
+            // Clear any existing indicators (if any)
+            carouselIndicators.innerHTML = '';
+            carousel.innerHTML = '';
 
-    // Generate carousel indicators and items dynamically
-    series.forEach((serie, index) => {
-        // Create Indicator
-        const indicator = document.createElement('button');
-        indicator.type = 'button';
-        indicator.setAttribute('data-bs-target', '#carouselExampleCaptions');
-        indicator.setAttribute('data-bs-slide-to', index);
-        indicator.setAttribute('aria-label', `Slide ${index + 1}`);
-        
-        // Add active class to first indicator
-        if (index === 0) {
-            indicator.classList.add('active');
-            indicator.setAttribute('aria-current', 'true');
-        }
-        
-        carouselIndicators.appendChild(indicator);
+            // Generate carousel indicators and items dynamically
+            series.forEach((serie, index) => {
+                // Create Indicator
+                const indicator = document.createElement('button');
+                indicator.type = 'button';
+                indicator.setAttribute('data-bs-target', '#carouselExampleCaptions');
+                indicator.setAttribute('data-bs-slide-to', index);
+                indicator.setAttribute('aria-label', `Slide ${index + 1}`);
 
-        // Create Carousel Item
-        const carouselItem = document.createElement('div');
-        carouselItem.classList.add('carousel-item');
-        
-        // Add active class to first item
-        if (index === 0) {
-            carouselItem.classList.add('active');
-        }
+                // Add active class to first indicator
+                if (index === 0) {
+                    indicator.classList.add('active');
+                    indicator.setAttribute('aria-current', 'true');
+                }
 
-        carouselItem.innerHTML = `
+                carouselIndicators.appendChild(indicator);
+
+                // Create Carousel Item
+                const carouselItem = document.createElement('div');
+                carouselItem.classList.add('carousel-item');
+
+                // Add active class to first item
+                if (index === 0) {
+                    carouselItem.classList.add('active');
+                }
+
+                carouselItem.innerHTML = `
             <a href="serie.html#${serie.id}">
                 <img class="d-block w-100" 
                      src="https://image.tmdb.org/t/p/original${serie.backdrop_path}" 
@@ -124,11 +123,44 @@ fetch(urlAPI, options)
             </div>
         `;
 
-        carousel.appendChild(carouselItem);
-    });
-})
-.catch(error => {
-    console.error('Erro ao buscar séries populares:', error);
-});
-        
+                carousel.appendChild(carouselItem);
+            });
+        })
+        .catch(error => {
+            console.error('Erro ao buscar séries populares:', error);
+        });
+
+    // Fetch Series
+    fetch('/Favoritos')
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Erro ao executar requisição: ' + res.status);
+            }
+            return res.json();
+        })
+        .then(favoritos => {
+            console.log(favoritos);
+            const favoritosDiv = document.getElementById('listaFavoritos');
+            if(favoritosDiv){
+                favoritos.forEach(serie => {
+                    const div = document.createElement('div');
+                    div.className = 'col-md-3';
+                    div.innerHTML = `
+
+                    <div class="col">
+                        <div class="card h-100">
+                            <a href="serie.html#${serie.id}">
+                                <img src="https://image.tmdb.org/t/p/w500/${serie.poster_path}" alt="${serie.name}" class="img-thumbnail">
+                            </a>
+                            <div class="card-body">
+                                <h5>${serie.name}</h5>
+                                <p>${serie.overview}</p>
+                            </div>
+                        </div>
+                    </div>`;
+                    favoritosDiv.appendChild(div);
+                });
+            }
+        })
+
 });

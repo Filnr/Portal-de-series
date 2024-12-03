@@ -28,82 +28,41 @@
     <main>
         <div class="container my-5">
             <h2 class="titulo">Visão Geral</h2>
-            <div class="row p-4 bg-light rounded shadow-sm">
-                <!-- Imagem da Série -->
-                <div class="col-md-4">
-                    <img id="imagem" class="img-fluid"
-                        alt="Imagem da Série">
-                </div>
-                <!-- Informações da Série -->
-                <div class="col-md-8">
-                    <h3 id="titulo"></h3>
-                    <p><strong>Gênero:</strong> <span id="generos">Carregando...</span></p>
-                    <p><strong>Plataforma:</strong> <span id="plataforma">Carregando...</span></p>
-                    <p><strong>Data de Lançamento:</strong> <span id="dataLancamento">Carregando...</span></p>
-                    <p><strong>Classificação:</strong> <span id="avaliacao">Carregando...</span></p>
-                    <p><strong>Descrição:</strong> <span id="descricao">Carregando...</span></p>
-                    <!-- Botão para adicionar a Minhas Séries -->
-                    <button class="btn btn-outline-success mt-3">Adicionar às Minhas Séries</button>
+            <div>
+                <div class="row p-4 bg-light rounded shadow-sm">
+                    <!-- Imagem da Série -->
+                    <div class="col-md-4">
+                        <img id="imagem" class="img-fluid"
+                            alt="Imagem da Série">
+                    </div>
+                    <!-- Informações da Série -->
+                    <div class="col-md-8">
+                        <h3 id="titulo"></h3>
+                        <p><strong>Gênero:</strong> <span id="generos">Carregando...</span></p>
+                        <p><strong>Plataforma:</strong> <span id="plataforma">Carregando...</span></p>
+                        <p><strong>Data de Lançamento:</strong> <span id="dataLancamento">Carregando...</span></p>
+                        <p><strong>Classificação:</strong> <span id="avaliacao">Carregando...</span></p>
+                        <p><strong>Descrição:</strong> <span id="descricao">Carregando...</span></p>
+                        <!-- Botão para adicionar a Minhas Séries -->
+                        <button class="btn btn-outline-success mt-3" id="favoritos">Adicionar às Minhas Séries</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="container">
-            <h2 class="titulo">Elenco</h2>
-            <div class="row row-cols-1 row-cols-md-4 g-4" id="elenco">
-                <!-- Cards de Elenco serão adicionados dinamicamente pelo JavaScript -->
+            <!-- Elenco -->
+            <div class="container">
+                <h2 class="titulo">Elenco</h2>
+                <div class="row row-cols-1 row-cols-md-4 g-4" id="elenco">
+                </div>
             </div>
-        </div>
-        </div>
-        <div class="container my-5">
-            <h2 class="titulo" id="temporadas">Temporadas e Episódios</h2>
-
-            <!-- Temporada 1 -->
-            <div class="row p-4 bg-light rounded shadow-sm mb-4">
-                <!-- Imagem da Temporada -->
-                <div class="col-md-3">
-                    <img src="./assets/img/temp1.webp" class="img-fluid thumb" alt="Temporada 1">
-                </div>
-                <!-- Informações da Temporada -->
-                <div class="col-md-9">
-                    <h4>Temporada 1</h4>
-                    <p><strong>Data de Lançamento:</strong> 2019</p>
-                    <p><strong>Descrição:</strong> A primeira temporada introduz Geralt, Yennefer e Ciri, e mostra como
-                        suas vidas começam a se entrelaçar em um mundo repleto de magia e monstros.</p>
-                </div>
             </div>
 
-            <!-- Temporada 2 -->
-            <div class="row p-4 bg-light rounded shadow-sm mb-4">
-                <!-- Imagem da Temporada -->
-                <div class="col-md-3">
-                    <img src="./assets/img/temp2.jpg" class="img-fluid thumb" alt="Temporada 2">
+            <!-- Temporadas e Episódios -->
+            <div class="container my-5">
+                <h2 class="titulo">Temporadas e Episódios</h2>
+                <div id="temporadas">
                 </div>
-                <!-- Informações da Temporada -->
-                <div class="col-md-9">
-                    <h4>Temporada 2</h4>
-                    <p><strong>Data de Lançamento:</strong> 2021</p>
-                    <p><strong>Descrição:</strong> Na segunda temporada, Geralt e Ciri continuam sua jornada,
-                        enfrentando novos desafios, enquanto Yennefer lida com as consequências da batalha em Sodden
-                        Hill.</p>
-                </div>
+                         
             </div>
-            <!-- Temporada 3 -->
-            <div class="row p-4 bg-light rounded shadow-sm mb-4">
-                <!-- Imagem da Temporada -->
-                <div class="col-md-3">
-                    <img src="./assets/img/temp3.webp" class="img-fluid thumb" alt="Temporada 2">
-                </div>
-                <!-- Informações da Temporada -->
-                <div class="col-md-9">
-                    <h4>Temporada 3</h4>
-                    <p><strong>Data de Lançamento:</strong> 2023</p>
-                    <p><strong>Descrição:</strong> A terceira temporada aprofunda a dinâmica entre Geralt, Ciri e
-                        Yennefer, enquanto eles enfrentam novos inimigos e revelações sobre seu passado. A luta pela
-                        sobrevivência se intensifica, e segredos antigos vêm à tona, desafiando suas lealdades e
-                        forçando-os a tomar decisões difíceis.</p>
-                </div>
-            </div>
-
         </div>
         </div>
     </main>
