@@ -8,7 +8,6 @@ const options = {
         Authorization: `Bearer ${TOKEN}`
     }
 };
-
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch Logo 
     const urlLogo = url + 'Logo';
@@ -138,29 +137,65 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             return res.json();
         })
-        .then(favoritos => {
-            console.log(favoritos);
-            const favoritosDiv = document.getElementById('listaFavoritos');
-            if(favoritosDiv){
-                favoritos.forEach(serie => {
-                    const div = document.createElement('div');
-                    div.className = 'col-md-3';
-                    div.innerHTML = `
-
-                    <div class="col">
-                        <div class="card h-100">
-                            <a href="serie.html#${serie.id}">
-                                <img src="https://image.tmdb.org/t/p/w500/${serie.poster_path}" alt="${serie.name}" class="img-thumbnail">
+        .then(ids => {
+            const seriesFavoritas = document.getElementById('listaFavoritos');
+            if (seriesFavoritas) {
+                for (let i = 0; i < ids.length; i++) {
+                    const urlSerie = `https://api.themoviedb.org/3/tv/${ids[i].id}?language=pt-BR`;
+                    fetch(urlSerie, options)
+                        .then(res => {
+                            if (!res.ok) {
+                                throw new Error('Erro ao executar requisição: ' + res.status);
+                            }
+                            return res.json();
+                        })
+                        .then(favoritos => {
+                            const favoritosDiv = document.getElementById('listaFavoritos');
+                            if (favoritosDiv) {
+                                const div = document.createElement('div');
+                                div.className = 'col-md-2 col-sm-6 my-3';
+                                div.innerHTML = `
+                                        <div class="card h-100">
+                                            <a href="serie.html#${favoritos.id}">
+                                                <img src="https://image.tmdb.org/t/p/w500/${favoritos.poster_path}" alt="${favoritos.name}" class="img-thumbnail">
+                                            </a>
+                                                <div class="card-body">
+                                                    <h5>${favoritos.name}</h5>
+                                                </div>
+                                        </div>`;
+                                favoritosDiv.appendChild(div);
+                            }
+                        })
+                        .catch(err => console.error(err));
+                };
+            }
+        });
+    //Novas séries
+    const urlNovas = 'https://api.themoviedb.org/3/tv/airing_today?language=pt-BR&page=1';
+    fetch(urlNovas, options)
+        .then(res => {
+            if (!res.ok) {
+                throw new Error('Erro ao executar requisição: ' + res.status);
+            }
+            return res.json();
+        })
+        .then(seriesNovas => {
+            console.log(seriesNovas);
+            const NovasDiv = document.getElementById('listaNovas');
+            if (NovasDiv) {
+                const div = document.createElement('div');
+                div.className = 'col-md-2 col-sm-6 my-3';
+                div.innerHTML = `
+                    <div class="card h-100">
+                        <a href="serie.html#${seriesNovas.id}">
+                            <img src="https://image.tmdb.org/t/p/w500/${seriesNovas.poster_path}" alt="${seriesNovas.name}" class="img-thumbnail">
                             </a>
                             <div class="card-body">
-                                <h5>${serie.name}</h5>
-                                <p>${serie.overview}</p>
-                            </div>
-                        </div>
+                                <h5>${seriesNovas.name}</h5>
+                            </div>                            
                     </div>`;
-                    favoritosDiv.appendChild(div);
-                });
+                favoritosDiv.appendChild(div);
             }
         })
-
+        .catch(err => console.error(err));
 });

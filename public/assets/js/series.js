@@ -115,25 +115,54 @@ document.addEventListener('DOMContentLoaded', function () {
     
     //Add favoritos
     document.getElementById('favoritos').addEventListener('click', function () {
-    fetch('/Favoritos', {
-        method: 'POST',
-        headers: {
-        'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ id: id })
-    })
-    .then(response => {
-        if (!response.ok) {
-        throw new Error('Erro ao adicionar aos favoritos: ' + response.status);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Adicionado aos favoritos:', data);
-    })
-    .catch(error => {
-        console.error('Erro no fetch dos Favoritos:', error);
-    });
+        // Primeiro, verifique se o item já existe no banco de dados
+        fetch(`/Favoritos/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status === 404) {
+                // Item não encontrado, pode adicionar
+                return null;
+            } else {
+                throw new Error('Erro ao verificar favoritos: ' + response.status);
+            }
+        })
+        .then(data => {
+            if (data) {
+                alert('Este item já está nos favoritos.');
+            } else {
+                // Item não encontrado, faça a requisição POST para adicionar
+                return fetch('/Favoritos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ 
+                        id: id,
+                        name: titulo.textContent,
+                    })
+                });
+            }
+        })
+        .then(response => {
+            if (response && !response.ok) {
+                throw new Error('Erro ao adicionar aos favoritos: ' + response.status);
+            }
+            return response ? response.json() : null;
+        })
+        .then(data => {
+            if (data) {
+                alert('Item adicionado aos favoritos com sucesso.');
+            }
+        })
+        .catch(error => {
+            console.error('Erro no fetch dos Favoritos:', error);
+        });
     });
 
 });
