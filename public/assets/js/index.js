@@ -1,5 +1,4 @@
 import { TOKEN } from './envs.js';
-const url = 'http://localhost:3000/'
 const urlAPI = 'https://api.themoviedb.org/3/tv/top_rated?language=pt-BR&page=1';
 const options = {
     method: 'GET',
@@ -10,7 +9,6 @@ const options = {
 };
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch Logo 
-    const urlLogo = url + 'Logo';
     fetch('/Logo')
         .then(response => {
             if (!response.ok) {
@@ -26,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function () {
             console.error('Erro no fetch do Logo:', error);
         });
     // Fetch Autor
-    const urlAutor = url + 'Autor';
     fetch('/Autor')
         .then(res => {
             if (!res.ok) {
@@ -180,21 +177,23 @@ document.addEventListener('DOMContentLoaded', function () {
             return res.json();
         })
         .then(seriesNovas => {
-            console.log(seriesNovas);
             const NovasDiv = document.getElementById('listaNovas');
             if (NovasDiv) {
-                const div = document.createElement('div');
-                div.className = 'col-md-2 col-sm-6 my-3';
-                div.innerHTML = `
+                for (let i = 0; i < 6; i++) {
+                    const serie = seriesNovas.results[i]; // Acessa a série individualmente
+                    const div = document.createElement('div');
+                    div.className = 'col-md-2 col-sm-6 my-3';
+                    div.innerHTML = `
                     <div class="card h-100">
-                        <a href="serie.html#${seriesNovas.id}">
-                            <img src="https://image.tmdb.org/t/p/w500/${seriesNovas.poster_path}" alt="${seriesNovas.name}" class="img-thumbnail">
-                            </a>
-                            <div class="card-body">
-                                <h5>${seriesNovas.name}</h5>
-                            </div>                            
+                        <a href="serie.html#${serie.id}">
+                            <img src="https://image.tmdb.org/t/p/w500/${serie.poster_path}" alt="${serie.name}" class="img-thumbnail">
+                        </a>
+                        <div class="card-body">
+                            <h5>${serie.name}</h5>
+                        </div>                            
                     </div>`;
-                favoritosDiv.appendChild(div);
+                    NovasDiv.appendChild(div);
+                }
             }
         })
         .catch(err => console.error(err));

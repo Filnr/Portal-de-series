@@ -94,7 +94,8 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(elenco => {
             const elencoDiv = document.getElementById('elenco');
             if (elencoDiv) {
-                elenco.cast.forEach(pessoa => {
+                for (let i = 0; i < 8; i++) {
+                    let pessoa = elenco.cast[i];
                     const div = document.createElement('div');
                     div.className = 'col-md-3';
                     div.innerHTML = `
@@ -108,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
                             </div>
                         </div>`;
                     elencoDiv.appendChild(div);
-                });
+                };
             }
         })
         .catch(err => console.error(err));

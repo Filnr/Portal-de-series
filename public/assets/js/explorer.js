@@ -1,9 +1,9 @@
-const url = 'http://localhost:3000/'
-document.addEventListener('DOMContentLoaded', function(){
-    const urlLogo = url + 'Logo';
+import { TOKEN } from './envs.js';
+
+document.addEventListener('DOMContentLoaded', function () {
     fetch('/Logo')
         .then(response => {
-            if(!response.ok){
+            if (!response.ok) {
                 throw new Error('Erro ao executar requisição: ' + response.status);
             }
             return response.text() // Mudança aqui: use text() em vez de json()
@@ -17,4 +17,20 @@ document.addEventListener('DOMContentLoaded', function(){
         .catch(error => {
             console.error('Erro no fetch do Logo:', error);
         });
+
+
+    const url = `https://api.themoviedb.org/3/search/tv?query=${nome}&include_adult=false&language=en-US&page=1`;
+    const options = {
+        method: 'GET',
+        headers: {
+            accept: 'application/json',
+            Authorization: `Bearer ${TOKEN}`
+        }
+    };
+
+    fetch(url, options)
+        .then(res => res.json())
+        .then(json => console.log(json))
+        .catch(err => console.error(err));
+
 });
