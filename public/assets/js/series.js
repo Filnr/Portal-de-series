@@ -114,6 +114,7 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(err => console.error(err));
     
     //Add favoritos
+    let adicionado = false;
     document.getElementById('favoritos').addEventListener('click', function () {
         // Primeiro, verifique se o item já existe no banco de dados
         fetch(`/Favoritos/${id}`, {
@@ -134,7 +135,13 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             if (data) {
-                alert('Este item já está nos favoritos.');
+                alert("Item removido dos favoritos.");
+                fetch(`/Favoritos/${id}`, {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
             } else {
                 // Item não encontrado, faça a requisição POST para adicionar
                 return fetch('/Favoritos', {
