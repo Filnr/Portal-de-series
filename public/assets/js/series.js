@@ -113,8 +113,12 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .catch(err => console.error(err));
     
+
+    document.getElementById('favoritos').addEventListener('click', function () {
+        this.classList.toggle('active');
+    });
+
     //Add favoritos
-    let adicionado = false;
     document.getElementById('favoritos').addEventListener('click', function () {
         // Primeiro, verifique se o item já existe no banco de dados
         fetch(`/Favoritos/${id}`, {
@@ -135,7 +139,6 @@ document.addEventListener('DOMContentLoaded', function () {
         })
         .then(data => {
             if (data) {
-                alert("Item removido dos favoritos.");
                 fetch(`/Favoritos/${id}`, {
                     method: 'DELETE',
                     headers: {
@@ -162,14 +165,35 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             return response ? response.json() : null;
         })
+        .catch(error => {
+            console.error('Erro no fetch dos Favoritos:', error);
+        });
+    });
+    //deixar o botão de favoritos ativo
+    window.onload = function () {
+        fetch(`/Favoritos/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                return response.json();
+            } else if (response.status === 404) {
+                return null;
+            } else {
+                throw new Error('Erro ao verificar favoritos: ' + response.status);
+            }
+        })
         .then(data => {
             if (data) {
-                alert('Item adicionado aos favoritos com sucesso.');
+                document.getElementById('favoritos').classList.add('active');
             }
         })
         .catch(error => {
             console.error('Erro no fetch dos Favoritos:', error);
         });
-    });
+    }
 
 });

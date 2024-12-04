@@ -8,3 +8,9 @@ body main img {
     height: auto;
     border-radius: 10%;
 }
+/*
+body main #favoritos{
+    background-color: #f8faf8;
+    color: #000;
+    border: 1px solid #000;
+}
