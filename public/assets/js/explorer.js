@@ -1,4 +1,12 @@
 import { TOKEN } from './envs.js';
+const urlAPI = 'https://api.themoviedb.org/3/tv/top_rated?language=pt-BR&page=1';
+const options = {
+    method: 'GET',
+    headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${TOKEN}`
+    }
+};
 
 document.addEventListener('DOMContentLoaded', function () {
     // Fetch para carregar a logo
@@ -16,10 +24,32 @@ document.addEventListener('DOMContentLoaded', function () {
         .catch(error => {
             console.error('Erro no fetch do Logo:', error);
         });
-
     let buscaSerie = '';
     const buscaInput = document.getElementById('busca');
     const seriesDiv = document.getElementById('listaSeries');
+    fetch(urlAPI, options)
+        .then(res => res.json())
+        .then(series => {
+            console.log(series);
+            if (seriesDiv) {
+                seriesDiv.innerHTML = ''; // Limpa os resultados anteriores
+                for (let i = 0; i < series.results.length; i++) {
+                    const serie = series.results[i]; // Acessa a série individualmente
+                    const div = document.createElement('div');
+                    div.className = 'col-md-2 col-sm-6 my-3';
+                    div.innerHTML = `
+                        <div class="card h-100">
+                            <a href="serie.html#${serie.id}">
+                                <img src="https://image.tmdb.org/t/p/w500/${serie.poster_path}" alt="${serie.name}" class="img-thumbnail">
+                            </a>
+                            <div class="card-body">
+                                <h5>${serie.name}</h5>
+                            </div>                            
+                        </div>`;
+                    seriesDiv.appendChild(div); // Adiciona o div ao seriesDiv
+                }
+            }
+        })
 
     // Função debounce para limitar a frequência das requisições
     function debounce(func, wait) {
@@ -34,13 +64,6 @@ document.addEventListener('DOMContentLoaded', function () {
     function buscarSeries() {
         if (buscaSerie.trim() !== '') {
             const url = `https://api.themoviedb.org/3/search/tv?query=${buscaSerie}&include_adult=false&language=pt_BR&page=1`;
-            const options = {
-                method: 'GET',
-                headers: {
-                    accept: 'application/json',
-                    Authorization: `Bearer ${TOKEN}`
-                }
-            };
 
             fetch(url, options)
                 .then(res => res.json())

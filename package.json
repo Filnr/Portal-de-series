@@ -4,8 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "json-server --watch db/db.json --port 3000",
-    "start": "node index.js"
+    "start": "json-server --watch db/db.json --port 3000"
   },
   "keywords": [],
   "author": "Filipe Nery Rabelo",
